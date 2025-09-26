@@ -24,7 +24,7 @@ export const AuthDropdown = ({
 			className={cn(css.dropdown, open && css.open)}
 		>
 			<div className={css.title}>
-				{<UserIcon />}
+				<UserIcon />
 				<span className={css.email}>{userEmail}</span>
 				<span className={css.arrow} />
 			</div>
