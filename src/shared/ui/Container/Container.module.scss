@@ -1,0 +1,15 @@
+@use "@/shared/styles/helpers" as helpers;
+
+.container {
+  padding: 0 21px;
+  margin: 0 auto;
+  max-width: 980px;
+
+  @include helpers.breakpoint(md) {
+    padding: 0 53px;
+  }
+
+  @include helpers.breakpoint(lg) {
+    padding: 0;
+  }
+}

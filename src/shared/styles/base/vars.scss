@@ -1,0 +1,26 @@
+:root {
+	--bg-gradient: radial-gradient(circle 800px at 700px 200px, var(--purple-2), transparent), radial-gradient(circle 600px at calc(100% - 300px) 300px, var(--blue-3), transparent), radial-gradient(circle 800px at right center, var(--sky-3), transparent), radial-gradient(circle 800px at right bottom, var(--sky-1), transparent), radial-gradient(circle 800px at calc(50% - 600px) calc(100% - 100px), var(--pink-3), var(--pink-1), transparent);
+
+	--bg-body-color: #fcfcfd;
+	--bg-card-color: #ffffff;
+	--primary-color: #2CC185;
+	--primary-color-hover: #109c64;
+	--bg-tab-color: #bdc2c9;
+
+	--text-color: #252525;
+	--text-color-invert: #ffffff;
+	--text-placeholder-color: #dedede;
+	--btn-text-color: #ffffff;
+
+	--card-border-color: #c4c4c4;
+	--border-color: #c4c4c4;
+
+	--color-red: #bf1c1c;
+
+	--purple-2: #fbf7fe;
+	--blue-3: #e6f4fe;
+	--sky-1: #f9feff;
+	--sky-3: #e1f6fd;
+	--pink-1: #fffcfe;
+	--pink-3: #fee9f5;
+}
