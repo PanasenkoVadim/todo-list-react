@@ -1,3 +1,6 @@
 export { Checkbox } from "./Checkbox"
 export { Button } from "./Button"
 export { Container } from "./Container"
+export { Portal } from "./Portal"
+export { Label } from "./Label"
+export { Input, Textarea } from "./FormFields"

@@ -1,15 +1,30 @@
+import { Button, Container } from "@/shared/ui"
 import { useEffect, useState } from "react"
-import { TodoList } from "./features/Todo"
+import { TodoAddForm, TodoList } from "./features/Todo"
+import { TodoItem } from "./shared/api/_types"
 import { Header } from "./widgets/Header"
-import { Button, Container } from "./shared/ui"
+import Modal from "./widgets/Modal/Modal"
 
 function App() {
-	const [todoItems, setTodoItems] = useState([])
+	const [todoItems, setTodoItems] = useState<TodoItem[]>([])
+	const [modalVisible, setModalVisible] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		getUsers().then(data => {
-			setTodoItems(data.todos)
-		})
+		const fetchTodo = async () => {
+			try {
+				setLoading(true)
+				const data = await getTodoItems()
+				setTodoItems(data.todos || [])
+			} catch (error) {
+				console.error("Ошибка загрузки:", error)
+				setTodoItems([])
+			} finally {
+				setLoading(false)
+			}
+		}
+
+		fetchTodo()
 	}, [])
 
 	return (
@@ -18,23 +33,38 @@ function App() {
 				<Header />
 				<TodoList items={todoItems} />
 				<div>
-					<Button appearance="add" />
+					<Button onClick={() => setModalVisible(true)} appearance="add" />
 				</div>
 			</Container>
+			<Modal
+				title="Новая задача"
+				isOpen={modalVisible}
+				onClose={() => setModalVisible(false)}
+			>
+				<TodoAddForm />
+			</Modal>
 		</div>
 	)
 }
 
 export default App
+interface Data {
+	todos: TodoItem[]
+}
 
-async function getUsers() {
-	const todos = await fetch("http://localhost:3000/api/todos", {
+async function getTodoItems(): Promise<Data> {
+	const response = await fetch("http://localhost:3000/api/todos", {
 		method: "GET",
 		headers: {
-			ContentType: "application/json",
+			"Content-Type": "application/json",
 			Authorization:
 				"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc1ODg3OTYxMSwiZXhwIjoxNzU5NDg0NDExfQ.yo6U_FXz_Ie6pAiKjE6WD7nZ2Z5gYewojyIFCxR91a4",
 		},
 	})
-	return todos.json()
+
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`)
+	}
+
+	return await response.json()
 }

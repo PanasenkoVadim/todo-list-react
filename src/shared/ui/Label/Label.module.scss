@@ -1,0 +1,18 @@
+@use "@/shared/styles/helpers" as helpers;
+
+.label {
+  // color: rgba(helpers.$black, 0.8);
+  font-weight: 500;
+  line-height: 1;
+  // pointer-events: none;
+  user-select: none;
+
+  @include helpers.breakpoint(sm) {
+    margin-bottom: -1px;
+  }
+
+  &__required {
+    margin-left: 2px;
+    // color: helpers.$pink;
+  }
+}
