@@ -1,0 +1,145 @@
+@use "@/shared/styles/helpers" as helpers;
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	padding: 40px 20px;
+}
+
+.inner {
+	display: flex;
+	flex-direction: column;
+	min-height: 565px;
+	width: 490px;
+
+	@include helpers.breakpoint(md) {
+		min-height: 685px;
+	}
+}
+
+.btns {
+	display: flex;
+	transform: translateY(1px);
+	justify-content: space-between;
+}
+
+.btn {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	width: calc(50% - 35px);
+	height: 40px;
+	background-color: var(--bg-tab-color);
+	color: var(--text-color-invert);
+	cursor: pointer;
+
+	@include helpers.breakpoint(md) {
+		height: 60px;
+		width: calc(50% - 45px);
+	}
+
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: var(--primary-color);
+
+			svg {
+				fill: var(--primary-color);
+			}
+		}
+	}
+
+	svg {
+		position: absolute;
+		width: fit-content;
+		height: 100%;
+		width: 60px;
+		bottom: 0;
+		fill: var(--bg-tab-color);
+
+		@include helpers.breakpoint(md) {
+			width: 80px;
+		}
+
+		path {
+			object-fit: cover;
+		}
+	}
+
+	&:first-child {
+		padding-left: 30px;
+		border-top-left-radius: 24px;
+
+		svg {
+			right: -56px;
+		}
+
+		@include helpers.breakpoint(md) {
+			padding-left: 40px;
+			border-top-left-radius: 40px;
+
+			svg {
+				right: -79px;
+			}
+		}
+
+	}
+
+	&:nth-child(2) {
+		padding-right: 30px;
+		border-top-right-radius: 24px;
+
+		svg {
+			left: -56px;
+			transform: scale3d(-1, 1, 1);
+		}
+
+		@include helpers.breakpoint(md) {
+			padding-right: 40px;
+			border-top-right-radius: 40px;
+
+			svg {
+				left: -79px;
+			}
+		}
+
+	}
+
+	&.active {
+		color: var(--text-color);
+		background-color: var(--bg-card-color);
+		z-index: 1;
+		pointer-events: none;
+
+		svg {
+			fill: var(--bg-card-color);
+		}
+	}
+}
+
+.content {
+	background-color: var(--bg-card-color);
+	box-shadow: 0 50px 100px -50px hsla(254, 100%, 6%, 0.7);
+	border-radius: 0 0 10px 10px;
+}
+
+.item {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: max-height .2s .2s, opacity .2s;
+	will-change: max-height;
+
+	&.active {
+		max-height: 525px;
+		opacity: 1;
+		transition: max-height .2s .2s, opacity .2s .4s;
+
+		@include helpers.breakpoint(md) {
+			max-height: 787px;
+		}
+	}
+}

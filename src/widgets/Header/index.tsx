@@ -10,8 +10,8 @@ export const Header = () => {
 				</div>
 				<AuthDropdown
 					userEmail="example@gmail.com"
-					onLogout={() => {}}
-					onChangeAccount={() => {}}
+					onLogout={() => console.log("logout")}
+					onChangeAccount={() => console.log("changeAccount")}
 				/>
 			</div>
 		</header>

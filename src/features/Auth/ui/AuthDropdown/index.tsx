@@ -10,27 +10,27 @@ export const AuthDropdown = ({
 }: Props) => {
 	const [open, setOpen] = useState(false)
 
-	const controller = {
-		open: () => !open && setOpen(true),
-		close: () => open && setOpen(false),
-		toggle: () => setOpen(prev => !prev),
+	const handleItemClick = (callback: VoidFunction) => () => {
+		setOpen(false)
+		callback()
 	}
 
 	return (
 		<div
-			onMouseEnter={controller.open}
-			onMouseLeave={controller.close}
-			onClick={controller.toggle}
+			onMouseEnter={() => setOpen(true)}
+			onMouseLeave={() => setOpen(false)}
 			className={cn(css.dropdown, open && css.open)}
 		>
-			<div className={css.title}>
+			<div className={css.title} onClick={() => setOpen(prev => !prev)}>
 				<UserIcon />
 				<span className={css.email}>{userEmail}</span>
 				<span className={css.arrow} />
 			</div>
 			<div className={css.content}>
-				<button onClick={onLogout}>Выйти</button>
-				<button onClick={onChangeAccount}>Сменить аккаунт</button>
+				<button onClick={handleItemClick(onLogout)}>Выйти</button>
+				<button onClick={handleItemClick(onChangeAccount)}>
+					Сменить аккаунт
+				</button>
 			</div>
 		</div>
 	)
